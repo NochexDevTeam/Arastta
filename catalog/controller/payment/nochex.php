@@ -13,27 +13,20 @@ class ControllerPaymentNochex extends Controller {
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
 		$data['action'] = 'https://secure.nochex.com/default.aspx';
-
-		// Nochex minimum requirements
-		// The merchant ID is usually your Nochex registered email address but can be altered for "Merchant" accounts see below
-		if ($this->config->get('nochex_email') != $this->config->get('nochex_merchant')) {
-			// This MUST be changed on your Nochex account!!!!
-			$data['merchant_id'] = $this->config->get('nochex_merchant');
-		} else {
-			$data['merchant_id'] = $this->config->get('nochex_email');
-		}
-if($this->config->get('nochex_debug')==1){
+		
+		$data['merchant_id'] = $this->config->get('nochex_merchant');
+		
+		if($this->config->get('nochex_debug')==1){
 		
 		$logger = new Log('nochex.log');
 		$logger->write('Nochex - Log');
 		
 		}
 		
-		
 		$data['amount'] = $this->currency->format($order_info['total'], 'GBP', false, false);
 		$data['order_id'] = $this->session->data['order_id'];
 		
-		
+		$products = $this->cart->getProducts();
 		
 		if($this->config->get('nochex_xmlcollection') == 1){
 		
@@ -63,7 +56,7 @@ if($this->config->get('nochex_debug')==1){
 		if($this->config->get('nochex_debug')==1){
 		
 		$logger->write('XMl Collection'.$xmlCollection);
-		$logger->write('Description'.$xmlCollection);
+		$logger->write('Description'.$description);
 		
 		}
 		
@@ -124,25 +117,15 @@ if($this->config->get('nochex_debug')==1){
 		$data['test'] = $this->config->get('nochex_test');
 		$data['success_url'] = $this->url->link('checkout/success', '', 'SSL');
 		$data['cancel_url'] = $this->url->link('checkout/payment', '', 'SSL');
-		$data['declined_url'] = $this->url->link('payment/nochex/callback', 'method=decline', 'SSL');
 		$data['callback_url'] = $this->url->link('payment/nochex/callback', 'order=' . $this->session->data['order_id'], 'SSL');
 
-
-		if($this->config->get('nochex_callback')==1){
+		$data['optional_2'] = "Enabled";
 		
-		$data['optional_1'] = "Enabled";
-		
-		}else{		
-		
-		$data['optional_1'] = "Disabled";
-		
-		}
 		
 		if($this->config->get('nochex_debug')==1){
 		
 		$logger->write('Success URL: '. $data['success_url']);
 		$logger->write('Cancel URL: '. $data['cancel_url']);
-		$logger->write('Declined URL: '. $data['declined_url']);
 		$logger->write('APC / Callback URL: '. $data['callback_url']);
 		
 		}
@@ -177,7 +160,7 @@ if($this->config->get('nochex_debug')==1){
 			$request .= '&' . $key . '=' . urlencode(stripslashes($value));
 		}
 		
-		if(isset($this->request->post['optional_1']) == "Enabled"){
+		if(isset($this->request->post['optional_2']) == "Enabled"){
 		$url = "https://secure.nochex.com/callback/callback.aspx";
 		$ch = curl_init();
 		curl_setopt ($ch, CURLOPT_URL, $url);
