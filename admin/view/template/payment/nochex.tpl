@@ -27,32 +27,6 @@
       <div class="panel-body">
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-nochex" class="form-horizontal">
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-email"><?php echo $entry_email; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="nochex_email" value="<?php echo $nochex_email; ?>" placeholder="<?php echo $entry_email; ?>" id="input-email" class="form-control" />
-              <?php if ($error_email) { ?>
-              <div class="text-danger"><?php echo $error_email; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-account"><?php echo $entry_account; ?></label>
-            <div class="col-sm-10">
-              <select name="nochex_account" id="input-account" class="form-control">
-                <?php if ($nochex_account == 'seller') { ?>
-                <option value="seller" selected="selected"><?php echo $text_seller; ?></option>
-                <?php } else { ?>
-                <option value="seller"><?php echo $text_seller; ?></option>
-                <?php } ?>
-                <?php if ($nochex_account == 'merchant') { ?>
-                <option value="merchant" selected="selected"><?php echo $text_merchant; ?></option>
-                <?php } else { ?>
-                <option value="merchant"><?php echo $text_merchant; ?></option>
-                <?php } ?>
-              </select>
-            </div>
-          </div>
-          <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-merchant"><?php echo $entry_merchant; ?><span data-toggle="tooltip" title="<?php echo $help_merchantid; ?>"></label>
             <div class="col-sm-10">
               <input type="text" name="nochex_merchant" value="<?php echo $nochex_merchant; ?>" placeholder="<?php echo $entry_merchant; ?>" id="input-merchant" class="form-control" />
@@ -60,54 +34,7 @@
               <div class="text-danger"><?php echo $error_merchant; ?></div>
               <?php } ?>
             </div>
-          </div>
-          <!--div class="form-group">
-            <label class="col-sm-2 control-label">< ?php echo $entry_template; ?></label>
-            <div class="col-sm-10">
-              <label class="radio-inline">
-                < ?php if ($nochex_template) { ?>
-                <input type="radio" name="nochex_template" value="1" checked="checked" />
-                < ?php echo $text_yes; ?>
-                < ?php } else { ?>
-                <input type="radio" name="nochex_template" value="1" />
-                < ?php echo $text_yes; ?>
-                < ?php } ?>
-              </label>
-              <label class="radio-inline">
-                < ?php if (!$nochex_template) { ?>
-                <input type="radio" name="nochex_template" value="0" checked="checked" />
-                < ?php echo $text_no; ?>
-                < ?php } else { ?>
-                <input type="radio" name="nochex_template" value="0" />
-                < ?php echo $text_no; ? >
-                < ? php } ? >
-              </label>
-            </div>
-          </div-->
-		  
-		   <div class="form-group">
-            <label class="col-sm-2 control-label"><?php echo $entry_callback; ?><span data-toggle="tooltip" title="<?php echo $help_callback; ?>"></label>
-            <div class="col-sm-10">
-              <label class="radio-inline">
-                <?php if ($nochex_callback) { ?>
-                <input type="radio" name="nochex_callback" value="1" checked="checked" />
-                <?php echo $text_yes; ?>
-                <?php } else { ?>
-                <input type="radio" name="nochex_callback" value="1" />
-                <?php echo $text_yes; ?>
-                <?php } ?>
-              </label>
-              <label class="radio-inline">
-                <?php if (!$nochex_callback) { ?>
-                <input type="radio" name="nochex_callback" value="0" checked="checked" />
-                <?php echo $text_no; ?>
-                <?php } else { ?>
-                <input type="radio" name="nochex_callback" value="0" />
-                <?php echo $text_no; ?>
-                <?php } ?>
-              </label>
-            </div>
-          </div>
+          </div>	
 		  
           <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $entry_test; ?><span data-toggle="tooltip" title="<?php echo $help_test; ?>"></label>
