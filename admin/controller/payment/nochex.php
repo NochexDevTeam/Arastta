@@ -38,11 +38,7 @@ class ControllerPaymentNOCHEX extends Controller {
 		$data['text_all_zones'] = $this->language->get('text_all_zones');
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
-		$data['text_seller'] = $this->language->get('text_seller');
-		$data['text_merchant'] = $this->language->get('text_merchant');
-
-		$data['entry_email'] = $this->language->get('entry_email');
-		$data['entry_account'] = $this->language->get('entry_account');
+		
 		$data['entry_merchant'] = $this->language->get('entry_merchant');
 		$data['entry_template'] = $this->language->get('entry_template');
 		$data['entry_test'] = $this->language->get('entry_test');
@@ -53,18 +49,16 @@ class ControllerPaymentNOCHEX extends Controller {
 		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
 		$data['entry_hide'] = $this->language->get('entry_hide');
-		$data['entry_callback'] = $this->language->get('entry_callback'); 
 		$data['entry_xmlcollection'] = $this->language->get('entry_xmlcollection');
 		$data['entry_debug'] = $this->language->get('entry_debug');
 		$data['entry_postage'] = $this->language->get('entry_postage');
 
 		$data['help_test'] = $this->language->get('help_test');
-		/*$data['help_total'] = $this->language->get('help_total');*/
 		$data['help_billing'] = $this->language->get('help_billing');
 		$data['help_debug'] = $this->language->get('help_debug');
 		$data['help_postage'] = $this->language->get('help_postage');
 		$data['help_xml'] = $this->language->get('help_xml');
-		$data['help_callback'] = $this->language->get('help_callback');
+		
 		$data['help_merchantid'] = $this->language->get('help_merchantid');
 		$data['help_total'] = $this->language->get('help_total');
 		
@@ -77,12 +71,6 @@ class ControllerPaymentNOCHEX extends Controller {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
 			$data['error_warning'] = '';
-		}
-
-		if (isset($this->error['email'])) {
-			$data['error_email'] = $this->error['email'];
-		} else {
-			$data['error_email'] = '';
 		}
 
 		if (isset($this->error['merchant'])) {
@@ -112,18 +100,6 @@ class ControllerPaymentNOCHEX extends Controller {
 
 		$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 
-		if (isset($this->request->post['nochex_email'])) {
-			$data['nochex_email'] = $this->request->post['nochex_email'];
-		} else {
-			$data['nochex_email'] = $this->config->get('nochex_email');
-		}
-
-		if (isset($this->request->post['nochex_account'])) {
-			$data['nochex_account'] = $this->request->post['nochex_account'];
-		} else {
-			$data['nochex_account'] = $this->config->get('nochex_account');
-		}
-
 		if (isset($this->request->post['nochex_merchant'])) {
 			$data['nochex_merchant'] = $this->request->post['nochex_merchant'];
 		} else {
@@ -140,11 +116,6 @@ class ControllerPaymentNOCHEX extends Controller {
 			$data['nochex_test'] = $this->request->post['nochex_test'];
 		} else {
 			$data['nochex_test'] = $this->config->get('nochex_test');
-		}
-if (isset($this->request->post['nochex_callback'])) {
-			$data['nochex_callback'] = $this->request->post['nochex_callback'];
-		} else {
-			$data['nochex_callback'] = $this->config->get('nochex_callback');
 		}
 		
 		if (isset($this->request->post['nochex_xmlcollection'])) {
@@ -218,10 +189,6 @@ if (isset($this->request->post['nochex_callback'])) {
 	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'payment/nochex')) {
 			$this->error['warning'] = $this->language->get('error_permission');
-		}
-
-		if (!$this->request->post['nochex_email']) {
-			$this->error['email'] = $this->language->get('error_email');
 		}
 
 		if (!$this->request->post['nochex_merchant']) {
