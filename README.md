@@ -12,6 +12,13 @@ Bug fixes and feature patches may be submitted using github pull requests, and b
 Changelog
 =====
 
+- 1.2 -
+
+  + Module Update
+  
+  - Bug fixes for module missing data / feature issues.
+  - Removed unnecessary script
+
 - 1.1 -
 
   + Module Update
