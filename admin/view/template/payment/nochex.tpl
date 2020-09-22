@@ -5,7 +5,6 @@
       <div class="pull-right">
         <button type="submit" form="form-nochex" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
         <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
-      <!--h1>< ?php echo $heading_title; ?></h1--->	  
 	  <img src="https://www.nochex.com/logobase-secure-images/nochex_standard_logo_190x50.gif" alt="" />
       <ul class="breadcrumb">
         <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -34,8 +33,7 @@
               <div class="text-danger"><?php echo $error_merchant; ?></div>
               <?php } ?>
             </div>
-          </div>	
-		  
+          </div>		  
           <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $entry_test; ?><span data-toggle="tooltip" title="<?php echo $help_test; ?>"></label>
             <div class="col-sm-10">
@@ -58,8 +56,7 @@
                 <?php } ?>
               </label>
             </div>
-          </div>
-		  
+          </div>		  
 		  <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $entry_xmlcollection; ?><span data-toggle="tooltip" title="<?php echo $help_xml; ?>"></label>
             <div class="col-sm-10">
@@ -82,8 +79,7 @@
                 <?php } ?>
               </label>
             </div>
-          </div>
-		  
+          </div>		  
 		  <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $entry_debug; ?><span data-toggle="tooltip" title="<?php echo $help_debug; ?>"></label>
             <div class="col-sm-10">
@@ -106,8 +102,7 @@
                 <?php } ?>
               </label>
             </div>
-          </div>
-		  
+          </div>		  
 		  <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $entry_postage; ?><span data-toggle="tooltip" title="<?php echo $help_postage; ?>"></label>
             <div class="col-sm-10">
@@ -131,8 +126,7 @@
               </label>
             </div>
           </div>
-		  
-		   <div class="form-group">
+		  <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $entry_hide; ?><span data-toggle="tooltip" title="<?php echo $help_billing; ?>"></label>
             <div class="col-sm-10">
               <label class="radio-inline">
@@ -154,8 +148,7 @@
                 <?php } ?>
               </label>
             </div>
-          </div>		  
-		  
+          </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip" title="<?php echo $help_total; ?>"><?php echo $entry_total; ?></span></label>
             <div class="col-sm-10">

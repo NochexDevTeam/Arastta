@@ -1,14 +1,16 @@
 <form action="<?php echo $action; ?>" method="post">
-  <?php if ($test) { ?>
-	<input type="hidden" name="test_transaction" value="100" />
-  <?php } ?>
-  
-  <input type="hidden" name="test_success_url" value="<?php echo $success_url; ?>" />
+  <?php if (!$test) { ?>
   <input type="hidden" name="success_url" value="<?php echo $success_url; ?>" />
   <input type="hidden" name="cancel_url" value="<?php echo $cancel_url; ?>" />
-  <input type="hidden" name="declined_url" value="<?php echo $declined_url; ?>" />  
-  <input type="hidden" name="callback_url" value="<?php echo $callback_url; ?>" />
+  <input type="hidden" name="declined_url" value="<?php echo $declined_url; ?>" />
+  <?php } else { ?>
+  <input type="hidden" name="test_transaction" value="100" />
+  <input type="hidden" name="test_success_url" value="<?php echo $success_url; ?>" />
+  <input type="hidden" name="test_cancel_url" value="<?php echo $cancel_url; ?>" />
+  <input type="hidden" name="test_declined_url" value="<?php echo $declined_url; ?>" />
+  <?php } ?>
   
+  <input type="hidden" name="callback_url" value="<?php echo $callback_url; ?>" />
   <input type="hidden" name="merchant_id" value="<?php echo $merchant_id; ?>" />
   <input type="hidden" name="amount" value="<?php echo $amount; ?>" />
   
@@ -30,10 +32,9 @@
   <input type="hidden" name="email_address" value="<?php echo $email_address; ?>" />
   <input type="hidden" name="optional_2" value="<?php echo $optional_2; ?>" />
   
-  <?php if($hide_billing_details == 1){ ?>  
-	<p style="text-align:right; font-weight:bold; color:red;">Please check your Billing Details match the Details on your card that you are going to use.</p>
+  <?php if($hide_billing_details == 1){ ?>
+	<p style="text-align:right; font-weight:bold; color:red;">Please check your Billing Details match the Details on your card that you are going to use.</p> 
   <?php } ?>
-  
   <div class="buttons">
     <div class="pull-right">
       <input type="submit" value="<?php echo $button_confirm; ?>" class="btn btn-primary" />

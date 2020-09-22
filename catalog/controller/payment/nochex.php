@@ -16,6 +16,7 @@ class ControllerPaymentNochex extends Controller {
 		
 		$data['merchant_id'] = $this->config->get('nochex_merchant');
 		
+		
 		if($this->config->get('nochex_debug')==1){
 		
 		$logger = new Log('nochex.log');
@@ -23,16 +24,17 @@ class ControllerPaymentNochex extends Controller {
 		
 		}
 		
+		
 		$data['amount'] = $this->currency->format($order_info['total'], 'GBP', false, false);
 		$data['order_id'] = $this->session->data['order_id'];
 		
-		$products = $this->cart->getProducts();
+		
 		
 		if($this->config->get('nochex_xmlcollection') == 1){
 		
 		$xmlCollection = "<items>";
 		
-		foreach ($products as $product) {
+		foreach ($this->cart->getProducts() as $product) {
 		
 			$xmlCollection .= "<item><id>".$product['product_id']."</id><name>".$product['name']."</name><description>".$product['model']."</description><quantity>".$product['quantity']."</quantity><price>" . $product['price'] . "</price></item>";
 		}
@@ -46,7 +48,7 @@ class ControllerPaymentNochex extends Controller {
 		$xmlCollection = "";
 		$description = "Product Details: ";
 		
-		foreach ($products as $product) {
+		foreach ($this->cart->getProducts() as $product) {
 			$description .= " Product ID: ".$product['product_id'].", Product Name: ".$product['name'].", Product Description: ".$product['model'].", Product Quantity: ".$product['quantity'].", Product Price: &pound;" . $product['price'] . "   ";
 		}
 		
@@ -56,13 +58,13 @@ class ControllerPaymentNochex extends Controller {
 		if($this->config->get('nochex_debug')==1){
 		
 		$logger->write('XMl Collection'.$xmlCollection);
-		$logger->write('Description'.$description);
+		$logger->write('Description'.$xmlCollection);
 		
 		}
 		
 		if($this->config->get('nochex_postage') == 1){
 		$data['postage'] = $this->currency->format($this->session->data['shipping_method']['cost'], $this->currency->getCode(), false, false);
-		$data['amount']  = $this->currency->format($order_info['total'], $currency, FALSE, FALSE) - $this->currency->format($this->session->data['shipping_method']['cost'], $this->currency->getCode(), false, false);
+		$data['amount']  = $this->currency->format($order_info['total'], $this->currency->getCode(), FALSE, FALSE) - $this->currency->format($this->session->data['shipping_method']['cost'], $this->currency->getCode(), false, false);
 		}else{
 		$data['postage'] =  "";
 		$data['amount'] = $this->currency->format($order_info['total'], 'GBP', false, false);
@@ -117,8 +119,11 @@ class ControllerPaymentNochex extends Controller {
 		$data['test'] = $this->config->get('nochex_test');
 		$data['success_url'] = $this->url->link('checkout/success', '', 'SSL');
 		$data['cancel_url'] = $this->url->link('checkout/payment', '', 'SSL');
+		$data['declined_url'] = $this->url->link('payment/nochex/callback', 'method=decline', 'SSL');
 		$data['callback_url'] = $this->url->link('payment/nochex/callback', 'order=' . $this->session->data['order_id'], 'SSL');
 
+		$data['hide_billing_details'] = $this->config->get('nochex_hide');
+		
 		$data['optional_2'] = "Enabled";
 		
 		
@@ -126,6 +131,7 @@ class ControllerPaymentNochex extends Controller {
 		
 		$logger->write('Success URL: '. $data['success_url']);
 		$logger->write('Cancel URL: '. $data['cancel_url']);
+		$logger->write('Declined URL: '. $data['declined_url']);
 		$logger->write('APC / Callback URL: '. $data['callback_url']);
 		
 		}
